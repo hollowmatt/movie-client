@@ -8,6 +8,24 @@ const Wrapper = styled.div`
     padding: 0 40px 40px 40px;
 `;
 
+const Update = styled.div`
+    color: #ef9b0f;
+    cursor: pointer;
+`;
+
+class UpdateMovie extends Component {
+    updateUser = event => {
+        event.preventDefault();
+        window.location.href = `/movies/update/${this.props.id}`;
+    };
+
+    render() {
+        return(
+            <Update onClick={this.updateUser}>Update</Update>
+        );
+    }
+}
+
 class MoviesList extends Component {
     constructor(props) {
         super(props);
@@ -53,7 +71,18 @@ class MoviesList extends Component {
                 Header: 'Time',
                 accessor: 'time',
                 Cell: props => <span>{props.value.join(' / ')}</span>,
-            }
+            },
+            {
+                Header: '',
+                accessor: '',
+                Cell: function(props) {
+                    return(
+                        <span>
+                            <UpdateMovie id={props.original._id} />
+                        </span>
+                    )
+                },
+            },
         ]
 
         let showTable = true
