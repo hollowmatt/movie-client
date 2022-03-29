@@ -49,6 +49,11 @@ class MoviesList extends Component {
                 accessor: 'rating',
                 filterable: true,
             },
+            {
+                Header: 'Time',
+                accessor: 'time',
+                Cell: props => <span>{props.value.join(' / ')}</span>,
+            }
         ]
 
         let showTable = true
