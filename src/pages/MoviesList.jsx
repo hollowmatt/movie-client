@@ -13,6 +13,11 @@ const Update = styled.div`
     cursor: pointer;
 `;
 
+const Delete = styled.div`
+    color: #ef0000;
+    cursor: pointer;
+`;
+
 class UpdateMovie extends Component {
     updateUser = event => {
         event.preventDefault();
@@ -22,6 +27,23 @@ class UpdateMovie extends Component {
     render() {
         return(
             <Update onClick={this.updateUser}>Update</Update>
+        );
+    }
+}
+
+class DeleteMovie extends Component {
+    deleteUser = event => {
+        event.preventDefault();
+
+        if(window.confirm(`Do you want to delete the movie ${this.props.id} permanently?`,)) {
+            api.deleteMovieById(this.props.id);
+            window.location.reload();
+        }
+    };
+
+    render() {
+        return(
+            <Delete onClick={this.deleteUser}>Delete</Delete>
         );
     }
 }
@@ -81,6 +103,17 @@ class MoviesList extends Component {
                             <UpdateMovie id={props.original._id} />
                         </span>
                     )
+                },
+            },
+            {
+                Header: '',
+                accessor: '',
+                Cell: function(props) {
+                    return(
+                        <span>
+                            <DeleteMovie id={props.original._id}/>
+                        </span>
+                    );
                 },
             },
         ]
