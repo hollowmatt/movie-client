@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {useParams} from 'react-router-dom';
 import api from '../api';
 import styled from 'styled-components';
 
@@ -39,7 +38,7 @@ const CancelButton = styled.a.attrs({
 class MoviesUpdate extends Component {
     constructor(props) {
         super(props)
-        const movie = this.props.match.params;
+        const movie = this.props.match.params.id;
         
         this.state = {
             id: movie,
